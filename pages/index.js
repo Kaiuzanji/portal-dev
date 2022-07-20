@@ -1,7 +1,7 @@
-export default function Home() {
+const SignIn = () => {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <h1>Tela de Login</h1>
   )
 }
+
+export default SignIn
