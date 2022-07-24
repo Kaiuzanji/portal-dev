@@ -12,27 +12,18 @@ type DarkModeProviderProps = {
 export const DarkModeContext = createContext({} as DarkModeContextProps)
 
 export const DarkModeProvider = ({ children }: DarkModeProviderProps) => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(true)
 
   const handleDarkMode = (isDarkMode:boolean) => {
-    if(isDarkMode){
+    if(isDarkMode)
       document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    }else{
+    else
       document.documentElement.classList.remove('dark')
-      localStorage.removeItem('theme')
-    }
+    setIsDarkMode(isDarkMode)
+    localStorage.setItem('theme', isDarkMode ? 'dark' : '' )
   }
 
-  const initializeDarkMode = () => {
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.classList.add('dark')
-      setIsDarkMode(true)
-    } else {
-      document.documentElement.classList.remove('dark')
-      setIsDarkMode(false)
-    }
-  }
+  const initializeDarkMode = () => handleDarkMode((localStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches))
   
   useEffect(() => initializeDarkMode(), [])
 
