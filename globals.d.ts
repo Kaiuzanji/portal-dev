@@ -1,3 +1,11 @@
+type FormFileValue = {
+  filename: string,
+  type: string,
+  size: number
+  dataUrl: string | ArrayBuffer | null
+  preview: string
+}
+
 type SignInFormValueType = {
   email: string,
   password: string
@@ -6,7 +14,7 @@ type SignInFormValueType = {
 type SignUpFormValueType = {
   fullName: string,
   cpf: string,
-  avatar: binary,
+  avatar: FormFileValue | null,
   email: string,
   password: string
 }

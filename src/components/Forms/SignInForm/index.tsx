@@ -1,11 +1,12 @@
-import { ChangeEvent } from "react"
+import { ChangeEvent, FormEvent } from "react"
 
 interface SignInFormProps {
   signInFormValues: SignInFormValueType,
-  setSignInFormValues: (value: SignInFormValueType) => void
+  setSignInFormValues: (value: SignInFormValueType) => void,
+  handleSubmitSignInForm: (event: FormEvent<HTMLFormElement>) => void
 }
 
-export default ({ signInFormValues, setSignInFormValues  }: SignInFormProps) => {
+export default ({ signInFormValues, setSignInFormValues, handleSubmitSignInForm  }: SignInFormProps) => {
 
   const handleChangeFormValue = (event: ChangeEvent<HTMLInputElement>) => {
     setSignInFormValues({
@@ -15,7 +16,7 @@ export default ({ signInFormValues, setSignInFormValues  }: SignInFormProps) => 
   }
 
   return (
-    <form className="space-y-4" autoComplete='off'>
+    <form className="space-y-4" autoComplete='off' onSubmit={handleSubmitSignInForm}>
       <div className="rounded-md -space-y-px flex flex-col gap-2">
         <div>
           <label htmlFor="email-address" className="dark:text-zinc-300">Email address</label>
